@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='style/choice-list.css') }}">
+
+	<div class="imgBox">
+		<a href="#" id="imgtb4"><img class="imgtop" src="static/img/default_0.jpg" alt="1"></a>
+		<a href="#" id="imgtb3"><img class="imgtop" src="static/img/default_1.jpg" alt="2"></a>
+		<a href="#" id="imggro"><img class="imgtop" src="static/img/default_2.jpg" alt="3"></a>
+		<a href="#" id="imglib"><img class="imgtop" src="static/img/default_3.jpg" alt="4"></a>
+	</div>
+
+	<div class="large_container">
+			<div class="post_list">
+				<div class="post_list_box">
+					<div  class="post_list_title">
+						<h2 class="post_list_title_h2">All Posts</h2>
+						<div class="post_num">
+							sum:<span > {{ number }} </span>records
+						</div>
+					</div>
+					<div  class="my_post_con">
+						<div>
+								<ul  class="my_post_list">
+									{% if posts %}
+										{% for post in posts %}
+										<li class="my_post_list_li" id=""> 
+												<a  class="my_post_list_a" href="{{ url_for('post_detail',post_id=post.id) }}">
+														{{ post.title }}
+												</a>
+												<label class="my_post_list_label">
+													<span>{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+													
+														{% if post.area==0 %}
+														<span class="area TB4">TB 4</span>
+														{% elif post.area==1 %}
+														<span class="area TB3">TB 3</span>
+														{% elif post.area==2 %}
+														<span class="area GRO">Ground</span>
+														{% elif post.area==3 %}
+														<span class="area LIB">Library</span>
+														{% endif %}
+												
+													{% for usera in users %}
+														{% if usera.id == post.user_id %}
+															<img class="authorhead" onerror="this.src='static/img/default_userhead.jpg'" src="static/img/{{usera.username}}_PHOTO.png" alt="userhead"></img>
+															<span class="author">{{ usera.username }}</span>
+														{% endif %}
+													{% endfor %}
+												</label>
+										</li>
+										{% endfor %}
+									{% else %}
+										<p>No previous posts!</p>
+										<hr>
+									{% endif %}
+								</ul> 
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- {{ pagination.info }} -->
+			<span class="page">{{ pagination.links }}</span>
+	</div>
+
+	<div class="small_container">
+		
+				<a href="{{ url_for('makepost',type_id=0) }}"><div class="makepost">make a post</div><a>
+				<ul class="list-group">
+						<li class="list-group-item-main">
+							<span class="list-text-main">All areas</span>
+						</li>
+						<li class="list-group-item">
+						    <a href="#" id="tb4"><img class="list-img" src="static/img/tb4_icon.png"></img>
+						    <span class="list-text">Teaching B.4</span></a>
+						</li>
+						<li class="list-group-item">
+							<a href="#" id="tb3"><img class="list-img" src="static/img/tb3_icon.png"></img>
+							<span class="list-text">Teaching B.3</span></a>
+						</li>
+						<li class="list-group-item">
+							<a href="#" id="gro"><img class="list-img" src="static/img/gro_icon.png"></img>
+							<span class="list-text">Ground</span></a>
+						</li>
+						<li class="list-group-item">
+							<a href="#" id="lib"><img class="list-img" src="static/img/lib_icon.png"></img>
+							<span class="list-text">Library</span></a>
+						</li>
+				</ul>
+			
+	</div>
+
+	<script type="text/javascript" src="static/script/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="static/script/choice.js"></script>
+	<noscript>Your browser does not support JavaScript!</noscript>
+{% endblock %}

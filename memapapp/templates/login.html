@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+<!-- reference lines31-41, lecture10 -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style/login.css') }}">
+
+	<div>	
+		<div class="login_box">
+			<h3>Welcome</h3>
+			<form action="" method="post" novalidate>
+				{{ form.hidden_tag() }}
+				<div class="input">
+					<img class="namepic"></img>
+						{{ form.username(size=32,class='text', placeholder='please enter username') }}
+						<p>
+							{% for error in form.username.errors %}
+							<span class="error">[{{error}}]</span>
+							{% endfor %}
+						</p>
+				</div>
+				<div class="input">
+					<img class="passpic"></img>
+						{{ form.password(size=32, class='text', placeholder='please enter password') }}
+						<p>
+							{% for error in form.password.errors %}
+							<span class="error">[{{error}}]</span>
+							{% endfor %}
+						</p>
+				</div>
+				<p class="remember">{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+				<div class="mb2"><p>{{ form.submit(class='act-but submit') }}</p></div>
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					<ul>
+						{% for message in messages %}
+						<li class="messagelist"><span class="message">{{ message }}</span></li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+					{% endwith %}
+			</form>
+		</div>
+	</div>
+	
+	
+{% endblock %}

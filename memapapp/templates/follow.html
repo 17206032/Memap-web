@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/choice-list.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style/post_detail.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style/follow.css') }}">
+
+    <div class="large_container">
+        <div class="post_container">
+                <div class="post_list">
+                        <div class="post_list_box">
+                            <div  class="post_list_title">
+                                <h2 class="post_list_title_h2">Recent Followed Posts</h2>
+                                <div class="post_num">
+                                    max: 5 records
+                                </div>
+                            </div>
+                            <div  class="my_post_con">
+                                <div>
+                                    <ul  class="my_post_list">
+                                        {% if posts %}
+                                            {% for post in posts %}
+                                            <li class="my_post_list_li" id=""> 
+                                                    <a  class="my_post_list_a" href="{{ url_for('post_detail',post_id=post.id) }}">
+                                                            {{ post.title }}
+                                                    </a>
+                                                    <label class="my_post_list_label">
+                                                        <span>{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                                                        
+                                                            {% if post.area==0 %}
+                                                            <span class="area TB4">TB 4</span>
+                                                            {% elif post.area==1 %}
+                                                            <span class="area TB3">TB 3</span>
+                                                            {% elif post.area==2 %}
+                                                            <span class="area GRO">Ground</span>
+                                                            {% elif post.area==3 %}
+                                                            <span class="area LIB">Library</span>
+                                                            {% endif %}
+                                                    
+                                                        {% for followeduser in followedusers %}
+                                                            {% if followeduser.id == post.user_id %}
+                                                                <img class="authorhead" onerror="this.src='../../static/img/default_userhead.jpg'" src="../../static/img/{{followeduser.username}}_PHOTO.png" alt="userhead"></img>
+                                                                <span class="author">{{ followeduser.username }}</span>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </label>
+                                            </li>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>No previous posts!</p>
+                                            <hr>
+                                        {% endif %}
+                                    </ul> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
+    </div>
+    <div class="small_container">
+        <div class="author_container">
+            <img class="postuserhead" onerror="this.src='../../static/img/default_userhead.jpg'" src="../../static/img/{{user.username}}_PHOTO.png" alt="userhead">
+            <h2 class="postusername">{{ user.username }}</h2>
+            <p class="follows">
+                <span>Follow: </span>
+                <span>{{follow}}</span>
+                <span>Followed by: </span>
+                <span>{{followed}}</span>
+            </p>
+        </div>
+
+        <div class="follow_group">
+            <h3>Followed users</h3>
+            {% if followedusers %}
+                {% for followeduser in followedusers %}
+                <div>
+                    <img class="frienduserhead" onerror="this.src='../../static/img/default_userhead.jpg'" src="../../static/img/{{followeduser.username}}_PHOTO.png" alt="userhead">
+                    <span class="friendusername">{{ followeduser.username }}</span>
+                    <a href="#"><span class="unfollowbtn" id="-{{followeduser.id}}">Unfollow</span></a>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="all_users">
+            <h3>All Users</h3>
+            {% if users %}
+            {% for usera in users %}
+                <div>
+                    <img class="frienduserhead" onerror="this.src='../../static/img/default_userhead.jpg'" src="../../static/img/{{usera.username}}_PHOTO.png" alt="userhead">
+                    <span class="friendusername">{{ usera.username }}</span>
+                    <a href="#"><span class="followbtn" id="{{usera.id}}">Follow</span></a>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+    //due to url_for with variables can only used here, so have to set js here
+        var fol = document.querySelectorAll(".followbtn");
+		for(var i=0;i<fol.length;i++){
+			var btn = fol[i];
+			var num = i;
+			fol[i].onclick = (function(num){
+				return function(){ //closure
+					var follow = document.querySelectorAll(".followbtn");
+					var idi = follow[num].getAttribute("id");
+					window.location.href ="{{ url_for('follow',user_id='abc') }}".replace("abc",idi);
+    			};
+			})(i);
+		}
+
+        var unfol = document.querySelectorAll(".unfollowbtn");
+		for(var i=0;i<unfol.length;i++){
+			var btn = unfol[i];
+			var nnum = i;
+			unfol[i].onclick = (function(num){
+				return function(){ //closure
+				    var follow = document.querySelectorAll(".unfollowbtn");
+                    if (confirm("Are you sure to unfollow him or her")) {
+					    var idi = follow[num].getAttribute("id");
+                        window.location.href ="{{ url_for('follow',user_id='abc') }}".replace("abc",idi);
+                    }else{
+                        
+                        alert("Cancel to unfollow"); 
+                    }
+					
+    			};
+			})(i);
+		}
+    
+    </script>
+    <noscript>Your browser does not support JavaScript!</noscript>
+{% endblock %}

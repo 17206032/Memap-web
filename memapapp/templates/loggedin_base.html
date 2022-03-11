@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- reference lines27-37, lecture10 -->
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/mystyle_login.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/main_base.css') }}">
+    </head>
+    <body>
+        <header id = "header" class="header">
+             <p class="appname">Memap</p>
+             <div class="headlist">
+                 <ul class="head-list">
+                    <li>
+                        <a href="{{ url_for('profile',post_id=-1) }}"><img class="userset" src="../../static/img/setting.png" alt="setting"></img></a> 
+                        <p class="username">{{ user.username }}</p>
+                        <img class="userhead" onerror="this.src='../../static/img/default_userhead.jpg'" src="../../static/img/{{user.username}}_PHOTO.png" alt="userhead"></img>
+                    </li>
+                    <li><a href="{{ url_for('logout') }}" class="menu">Logout</a></li>
+                    <li><a href="{{ url_for('makepost',type_id=0) }}" class="menu">Write a Post</a></li>
+                    <li><a href="{{ url_for('follow', user_id=0) }}" class="menu">Follow</a></li>
+                    <li><a href="{{ url_for('map') }}" class="menu">Map</a></li>
+                    <li><a href="{{ url_for('choice') }}" class="menu">Home</a></li>
+                </ul>
+            </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li class="messagelist"><span class="message">{{ message }}</span></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <div class="main_container">
+                {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>

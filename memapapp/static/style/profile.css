@@ -1,0 +1,72 @@
+.titletext{
+    margin-left: 10px;
+    color: dimgray;
+}
+
+.submitbtn{ 
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft", Georgia, 'Times New Roman';
+    border-radius: 5px;
+    height: 30px;
+    margin-top: 10px;
+    text-align: right;
+    color: white;
+    background: dimgrey;
+    margin-left: 60px;
+}
+
+.choosebtn{
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    height: 30px;
+    margin-top: 10px;
+    text-align: right;
+    color: black;
+    margin-left: 20px;
+}
+
+.formtext{
+    font-weight: bold;
+    margin-left: 20px;
+    font-family: "Microsoft soft", Georgia, 'Times New Roman';
+}
+
+.choicetext{
+    color: dimgrey;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.choicelabel:first-child{
+    margin-left: 10px;
+}
+
+.choicelabel{
+    margin-left: 5px;
+}
+
+.dob{
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 13px 14px;
+    width: 175px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    font-family: "Microsoft soft";
+    margin-left: 25px;
+    height: 20px;
+}
+
+.delete:hover{
+    color: green;
+}
+
+.error{
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    display: block;
+}

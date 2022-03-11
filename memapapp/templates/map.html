@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/map_detail.css') }}">
+    <div class="large_container">
+        <img src="static/img/bjutmap.png" usemap="#bjutmap" alt="bjut map" class="map">
+        <map name="bjutmap" id="bjutmap">
+            <area class="maparea" shape="rect" coords="520,210,600,250" href="{{ url_for('makepost',type_id=0) }}" alt="Teaching Building 4">
+            <area class="maparea" shape="rect" coords="350,220,450,250" href="{{ url_for('makepost',type_id=1) }}" alt="Teaching Building 3">
+            <area class="maparea" shape="rect" coords="440,110,490,200" href="{{ url_for('makepost',type_id=2) }}" alt="Play Ground">
+            <area class="maparea" shape="rect" coords="460,215,500,315" href="{{ url_for('makepost',type_id=2) }}" alt="Play Ground">
+            <area class="maparea" shape="rect" coords="310,240,340,290" href="{{ url_for('makepost',type_id=3) }}" alt="Library">
+        </map>
+    </div>
+    <div class="small_container">
+        <p class="maptext">BJUT</p>
+        <p class="maptext">Click a place to write your post</p>
+    </div>
+{% endblock %}

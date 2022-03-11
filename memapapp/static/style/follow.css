@@ -1,0 +1,81 @@
+.follow_group{
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #e8e8e8;
+    background-color: antiquewhite;
+}
+
+.small_container{
+    background: white;
+}
+
+.author_container{
+    background-color: antiquewhite; 
+}
+
+.frienduserhead{
+    margin-top: 5px;
+    margin-bottom: 5px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.friendusername{
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-bottom: 30px;
+}
+
+.follow_group a{
+    vertical-align: middle;
+    text-decoration: none;
+    padding-bottom: 30px;
+}
+
+.follow_group a span{
+    vertical-align: middle;
+    border: 1px solid black;
+    color: whitesmoke;
+    padding: 2px;
+    font-family: "Microsoft soft", Georgia, 'Times New Roman';
+    background: dimgrey;
+}
+
+.all_users{
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #e8e8e8;
+    background-color: antiquewhite;
+}
+
+.all_users a{
+    vertical-align: middle;
+    text-decoration: none;
+    padding-bottom: 30px;
+}
+
+.all_users a span{
+    vertical-align: middle;
+    border: 1px solid black;
+    color: whitesmoke;
+    padding: 2px;
+    font-family: "Microsoft soft", Georgia, 'Times New Roman';
+    background: dimgrey;
+}
+
+.follows span:nth-child(odd){
+    margin-left: 10px;
+    font-family: "Microsoft soft", Georgia, 'Times New Roman';
+    font-weight: bold;
+    color: black;
+}
+
+.follows span:nth-child(even){
+    color: lightslategray;
+}
+
+.follows span:first-child{
+    margin-left: 30px;
+}

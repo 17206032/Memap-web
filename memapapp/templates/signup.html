@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style/login.css') }}">
+	<div>
+		<div class="login_box">
+			<h3>Welcome New User</h3>
+			<form action="" method="post" novalidate>
+				{{ form.hidden_tag() }}
+				<div class="input">
+					<img class="namepic"></img>
+					{{ form.username(size=32,id="usernameval", class='text', placeholder='Set your username') }}
+					<p>
+						<span class="error" id="usernameerror"></span>
+						{% for error in form.username.errors %}
+						<span class="error" id="usernameerror2">[{{error}}]</span>
+						{% endfor %}</p>
+                </div>
+
+                <div class="input">
+					<img class="emailpic"></img>
+					{{ form.email(size=32,id="emailval", class='text', placeholder='Enter your email') }}
+					<p>
+						<span class="error" id="emailerror"></span>
+						{% for error in form.email.errors %}
+						<span class="error" id="emailerror2">[{{error}}]</span>
+						{% endfor %}</p>
+                </div>
+                        
+				<div class="input">
+					<img class="passpic"></img>
+					{{ form.password(size=32,id="passwordval1", class='text', placeholder='Set your password') }}
+					<p>
+						<span class="error" id="password1error"></span>
+						{% for error in form.password.errors %}
+						<span class="error" id="password1error2">[{{error}}]</span>
+						{% endfor %}
+					</p>
+                </div>
+                        
+                <div class="input">
+					<img class="passpic"></img>
+					{{ form.password2(size=32,id="passwordval2", class='text', placeholder='repeat your password') }}
+					<p>
+						<span class="error" id="password2error"></span>
+						{% for error in form.password2.errors %}
+						<span class="error" id="password2error2">[{{error}}]</span>
+						{% endfor %}
+					</p>
+				</div>
+					<p>{{ form.accept_rules() }} {{ form.accept_rules.label }}</p>
+			            {% for error in form.accept_rules.errors %}
+			            <span class="error">[{{ error }}]</span>
+		            	{% endfor %}
+				<div class="mb2"><p>{{ form.submit(class='act-but submit') }}</p></div>
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					<ul>
+						{% for message in messages %}
+						<li class="messagelist"><span class="message">{{ message }}</span></li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+					{% endwith %}
+			</form>
+		</div>
+	</div> 
+	
+	<script type="text/javascript" src="/static/script/signup.js"></script>
+	<noscript>Your browser does not support JavaScript!</noscript>
+{% endblock %}

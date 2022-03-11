@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/post_detail.css') }}">
+    <div class="large_container">
+        <div class="post_container">
+            <h2>{{ post.title }}</h2>
+            <p class="post_info_group">
+                <span>Time: {{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                <span>Author: {{ usera.username }}</span>
+            </p>
+            <article class="post_content">
+                <div><img onerror="this.src='../../static/img/default_post.jpg'" src="../../static/img/{{ post.photo.decode('utf-8') }}" alt="content image"></div>
+                <p>{{ post.body|safe }}</p>
+            </article>
+        </div>
+        <div class="comment_container">
+            <h3>Comment List</h3>
+            <ul class="comment_list_group">
+                {% if comments %}
+                    {% for comment in comments %}
+                    <li>
+                        {% for user in users %}
+                            {% if user.id == comment.user_id %}
+                            <div class="authorhead_group">
+                                <img class="authorhead" onerror="this.src='../../static/img/default_userhead.jpg'" src="../../static/img/{{user.username}}_PHOTO.png" alt="userhead">
+                            </div>
+                            <div class="comment_content">
+                                <p class="comment_author">
+                                    <span>{{ user.username }}</span>
+                                    <span>{{ comment.create_time.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+                                </p>
+                                <p class="comment_text">{{ comment.content }}</p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <p class="comment_text">No comments</p>
+                {% endif %}
+            </ul>
+        </div>
+        <form action="" method="post" enctype="multipart/form-data" novalidate>
+        <div class="add_comment_group">
+            <h3>Add comment</h3>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.content(size=32, class='addcomment') }}
+
+                {% for error in form.content.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit(class='submitbtn') }}</p>
+        </div>
+        </form>
+    </div>
+    <div class="small_container">
+        <div class="author_container">
+            <img class="postuserhead" onerror="this.src='../../static/img/default_userhead.jpg'" src="../../static/img/{{usera.username}}_PHOTO.png" alt="userhead">
+            <h2 class="postusername">{{ usera.username }}</h2>
+        </div>
+    </div>
+{% endblock %}

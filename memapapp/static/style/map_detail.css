@@ -1,0 +1,17 @@
+.map{
+    max-width: 100%;
+}
+
+.maptext{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+    height: 30px;
+    margin-top: 10px;
+    color: white;
+}
+
+.small_container{
+    background: dimgrey;
+}

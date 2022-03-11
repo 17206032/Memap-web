@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/choice-list.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/profile.css') }}">
+	<div class="small_container">
+	<h3 class="titletext"> Complete your profile:</h3>
+	<form action="" method="post" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            <span class="formtext">{{ form.dob.label }}</span><br>
+            {{ form.dob(size=32,class='dob',id='dobinput') }}
+			
+			<span class="error" id="doberror"></span>
+			{% for error in form.dob.errors %}
+            <span class="error">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+		<p>
+			<span class="formtext">{{ form.gender.label }}</span><br>
+			<p>
+			{% for choice in form.gender %}
+					<span class="choicelabel">{{ choice }}<span>
+					<span class="choicetext">{{ choice.label }}</span>
+			{% endfor %}
+				
+			{% for error in form.gender.errors %}
+			<span class="error">[{{ error }}]</span>
+			{% endfor %}
+			</p>
+        </p>
+		<p>
+			<span class="formtext">{{ form.cv.label }}</span><br>
+            {{ form.cv(size=12,class='choosebtn') }}
+			
+			{% for error in form.cv.errors %}
+            <span class="error">[{{ error }}]</span>
+            {% endfor %}
+		</p>
+		<p>
+			<span class="formtext">{{ form.photo.label }}</span><br>
+            {{ form.photo(size=12,class='choosebtn') }}
+			
+			{% for error in form.photo.errors %}
+            <span class="error">[{{ error }}]</span>
+            {% endfor %}
+		</p>
+		<p>{{ form.submit(class='submitbtn', id='submit') }}</p>
+	</form>
+	</div>
+
+	<div class="large_container">
+		<div class="post_list">
+		<ul  class="my_post_list">
+			<div class="post_list_box">
+					<div  class="post_list_title">
+						<h2 class="post_list_title_h2">My Previous Posts</h2>
+						<div class="post_num">
+							sum:<span> {{ number }} </span>records
+						</div>
+					</div>
+				{% if posts %}
+					{% for post in posts %}
+					<li class="my_post_list_li"> 
+							<a  class="my_post_list_a" href="{{ url_for('post_detail',post_id=post.id) }}">
+									{{ post.title }}
+							</a>
+							<label class="my_post_list_label">
+								<span>{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</span>
+								
+									{% if post.area==0 %}
+									<span class="area TB4">TB 4</span>
+									{% elif post.area==1 %}
+									<span class="area TB3">TB 3</span>
+									{% elif post.area==2 %}
+									<span class="area GRO">Ground</span>
+									{% elif post.area==3 %}
+									<span class="area LIB">Library</span>
+									{% endif %}
+
+									
+								<a href="#"><span class="delete" id="{{post.id}}">Delete</span></a>
+							</label>
+					</li>
+					{% endfor %}
+				{% else %}
+					<p>No previous posts!</p>
+					<hr>
+				{% endif %}
+			</div>
+		</ul> 
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../static/script/profile.js"></script>
+	<script type="text/javascript">
+	//due to url_for with variables can only used here, so have to set js here
+		// delete function
+		var de = document.querySelectorAll(".delete");
+		for(var i=0;i<de.length;i++){
+			var btn = de[i];
+			var num = i;
+			de[i].onclick = (function(num){
+				return function(){ //closure
+					var del = document.querySelectorAll(".delete");
+					if (confirm("Are you sure to delete it")) {
+						var idi = del[num].getAttribute("id");
+						window.location.href ="{{ url_for('profile',post_id='abc') }}".replace("abc",idi);
+					}  
+					else {  
+						alert("Cancel to delete");  
+					}  
+    			};
+			})(i);
+		}
+	</script>
+	<noscript>Your browser does not support JavaScript!</noscript>
+{% endblock %}

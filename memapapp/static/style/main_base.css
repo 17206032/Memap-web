@@ -1,0 +1,19 @@
+.main_container{
+    width: 990px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.large_container{
+    margin-top: 10px;
+    width: 730px;
+    float: left;
+    background-color: antiquewhite;   
+}
+
+.small_container{
+    margin-top: 10px;
+    width: 250px;
+    float: right;
+    background-color: antiquewhite;
+}

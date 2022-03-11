@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Memap</title>
+      {% else %}
+      <title>Memap</title>
+      {% endif %}
+	  <link rel="stylesheet" href="{{ url_for('static', filename='style/mystyle.css') }}">
+    </head>
+    <body>
+		<header id = "header" class="header">
+		<p class="appname">Memap</p>
+        <div class="headlist">
+			<ul class="head-list">
+				<li><a href="{{ url_for('signup') }}">Signup</a></li>
+				<li><a href="{{ url_for('login') }}">Login</a></li>
+			</ul>
+		</div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
+

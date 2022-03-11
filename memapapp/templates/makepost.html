@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style/writepost.css') }}">
+
+	<div class="writepost_container">
+	<h2> Let's complete your post:</h2>
+	<img src="../../static/img/default_{{type_id}}.jpg" alt="Area">
+	<form action="" method="post" enctype="multipart/form-data" novalidate>
+		{{ form.hidden_tag() }}
+        <p>
+			<span class="formtext">{{ form.title.label }}</span>
+			{{ form.title(size=32,class='addtitle') }}
+			
+			{% for error in form.body.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+		</p>
+		<p>
+			<span class="formtext">{{ form.area.label }}</span><br>
+			<p>
+			{% for choice in form.area %}
+					<span class="choicelabel">{{ choice }}<span>
+					<span class="choicetext">{{ choice.label }}</span>
+			{% endfor %}
+				
+			{% for error in form.area.errors %}
+			<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+			</p>
+		</p>
+		<br>
+		<p>
+			<span class="formtext">{{ form.body.label }}</span>
+			{{ form.body(size=32,class='addbody') }}
+				
+			{% for error in form.body.errors %}
+			<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>
+			<span class="formtext">{{ form.photo.label }}</span><br>
+			{{ form.photo(size=12,class='choosebtn') }}
+				
+			{% for error in form.photo.errors %}
+			<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+		<p>{{ form.submit(class='submitbtn') }}</p>
+	</form>
+
+	</div>
+
+
+	
+{% endblock %}

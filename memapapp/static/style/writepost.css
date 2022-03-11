@@ -1,0 +1,86 @@
+.main_container{
+    background-color: antiquewhite;  
+}
+
+.writepost_container img{
+    max-width: 70%;
+    padding-left: 140px;
+    padding-bottom: 30px;
+}
+
+.writepost_container h2{
+    padding-left: 20px;
+}
+
+.writepost_container{
+    margin-top: 20px;
+}
+
+.addbody{
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 13px 14px;
+    width: 670px;
+    word-break:break-all;
+    word-wrap: break-word;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+    margin-left: 20px;
+    height: 200px;
+}
+
+.addtitle{
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+    padding: 13px 14px;
+    width: 450px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+    margin-left: 30px;
+}
+
+.formtext{
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.choicetext{
+    color: dimgrey;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.choicelabel:first-child{
+    margin-left: 110px;
+}
+
+.choicelabel{
+    margin-left: 30px;
+}
+
+.submitbtn{ 
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+    border-radius: 5px;
+    height: 30px;
+    margin-top: 10px;
+    text-align: right;
+    color: white;
+    background: dimgrey;
+    margin-left: 450px;
+}
+
+.choosebtn{
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    height: 30px;
+    margin-top: 10px;
+    text-align: right;
+    color: black;
+    margin-left: 115px;
+}

@@ -1,0 +1,2 @@
+FLASK_APP=memap.py
+FLASK_DEBUG=1
